@@ -1,0 +1,119 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+// creating the gameBoard
+void displayBoard(char gameBoard[9]){
+  cout << "Current Board State: "<< endl;
+  
+  string gap = "                       ";
+  for(int i=0; i<3; i++){
+    cout << gap;
+    for(int j=0; j<3; j++){
+      if(j != 2){
+        cout << gameBoard[j + i*3];
+        cout << "|";
+        
+      }else{
+        cout << gameBoard[j + i*3]<<endl;
+      }
+      
+    }cout << gap;
+    if(i != 2){
+      cout <<"-+-+-"<<endl;
+    }else{
+      cout <<endl;
+    }
+    
+  }
+  
+}
+
+
+// driver code
+int main(){
+  int chosenSquare = 0;
+ 
+  const char PLAYER_X ='X', PLAYER_O='O';
+    char lastPlayer =PLAYER_O, currentPlayer=PLAYER_X;
+  
+  char gameBoard[] = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
+  
+  cout <<"\n\n\n              || Tic Tac Toe Game || \n__________________________________________By Rahul Sharma" <<endl;
+  
+  displayBoard(gameBoard);
+  
+  
+  // input by the user
+  for(int trial=0; trial<9; trial++){
+    cout<<"Player "<<currentPlayer<<" , Enter a number between 1 and 9: ";
+    cin>> chosenSquare;
+    
+    while((chosenSquare <= 0 || chosenSquare > 9) || (gameBoard[chosenSquare -1] == 'X' 
+    || gameBoard[chosenSquare -1] == 'O')) {
+      if( chosenSquare <= 0 || chosenSquare > 9){
+        cout << "Not a valid choice, try again! " <<endl;
+        cout << "Player " << currentPlayer << " , enter a number between 1 and 9: ";
+        cin >> chosenSquare ;
+        
+      }else if(gameBoard[chosenSquare -1] == 'X' || gameBoard[chosenSquare -1] == 'O'){
+        cout << "This square is not available, try again! " <<endl;
+        cout <<"Player "<<currentPlayer <<" , enter a number between 1 and 9: ";
+        cin >> currentPlayer ;
+      }
+    }
+    
+    //swapping between player X and player O
+    if(currentPlayer == PLAYER_X){
+      if(gameBoard[chosenSquare -1] != 'X' && gameBoard[chosenSquare -1] != 'O'){
+        gameBoard[chosenSquare -1] = 'X';
+      }
+      swap(currentPlayer, lastPlayer);
+      
+    }else{
+      if(gameBoard[chosenSquare -1] != 'X' && gameBoard[chosenSquare -1] != 'O'){
+        gameBoard[chosenSquare -1] = 'O';
+      }
+      swap(currentPlayer, lastPlayer);
+    }
+      
+    //updating the gameBoard
+    displayBoard(gameBoard);
+    
+    //validating for winning 
+    if(gameBoard[0] == gameBoard[3] && gameBoard[3] == gameBoard[6]){
+       cout<< "Player "<<lastPlayer << " wins the game!" <<endl;
+       break;
+    }else if(gameBoard[1] == gameBoard[4] && gameBoard[4] == gameBoard[7]){
+       cout<< "Player "<<lastPlayer << " wins the game!" <<endl;
+       break;
+      
+    }else if(gameBoard[2] == gameBoard[5] && gameBoard[5] == gameBoard[8]){
+       cout<< "Player "<<lastPlayer << " wins the game!" <<endl;
+       break;
+    
+    }else if(gameBoard[0] == gameBoard[1] && gameBoard[1] == gameBoard[2]){
+       cout<< "Player "<<lastPlayer << " wins the game!" <<endl;
+       break;
+       
+    }else if(gameBoard[3] == gameBoard[4] && gameBoard[4] == gameBoard[5]){
+       cout<< "Player "<<lastPlayer << " wins the game!" <<endl;
+       break;
+       
+    }else if(gameBoard[6] == gameBoard[7] && gameBoard[7] == gameBoard[8]){
+       cout<< "Player "<<lastPlayer << " wins the game!" <<endl;
+       break;
+       
+    }else if(gameBoard[0] == gameBoard[4] && gameBoard[4] == gameBoard[8]){
+       cout<< "Player "<<lastPlayer << " wins the game!" <<endl;
+       break;
+       
+    }else if(gameBoard[2] == gameBoard[4] && gameBoard[4] == gameBoard[6]){
+       cout<< "Player "<<lastPlayer << " wins the game!" <<endl;
+       break;
+  
+    }else if(trial == 8){
+      cout<<"No One wins...."<<endl;
+    }
+    cout <<endl;
+  }
+}
