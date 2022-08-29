@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Word and Character Counter</title>
+
+        <style>
+            body{
+                background-image: linear-gradient(rgba(158, 70, 199, 0.555), white);
+                background-repeat: no-repeat;
+                height: 400px;
+                width: 100%;
+            }
+            #heading{
+                text-align: center;
+                color: white;
+                margin: 20px;
+            }
+            #textBox{
+                width: 900px;
+                height: 300px;
+                text-align: justify;
+                margin: 10px 200px;
+                font-size: 15px;
+            }
+            p{
+                font-size: 30px;
+                color: rgb(158, 70, 199);
+                text-align: center;
+                margin: 0px;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <h1 id="heading">Word and Character Counter</h1>
+            <textarea name="type here...." id="textBox" cols="30" rows="10"></textarea>
+            <p>
+               <span id="word">0</span> words and <span id="char">0</span> characters
+            </p>
+        </div>
+
+        <script>
+            let text = document.getElementById("textBox");
+            let character = document.getElementById("char");
+            let words = document.getElementById("word");
+            text.addEventListener('input', function(){
+                var text = this.value;
+                let char = text.length;
+                character.innerHTML = char;
+
+
+                text = text.trim();
+                
+                let wrdArr = text.split(" ");
+                let cleanedText = wrdArr.filter(function(elm){
+                    return elm != "";
+                });
+                words.innerHTML = cleanedText.length;
+            });
+        </script>
+    </body>
+</html>
+
+
+
